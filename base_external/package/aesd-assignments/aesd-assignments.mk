@@ -5,7 +5,7 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_VERSION = 92f220a51380587c5095eabb45474cdb9dae7855
+AESD_ASSIGNMENTS_VERSION = 42c576faac9d95dae335347851233038187cdf0f
 # Note: ssh URL required (not https) for automated build/test system
 AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-Andrushika.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
@@ -13,6 +13,7 @@ AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server all
 endef
 
 define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
@@ -21,6 +22,8 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/finder-app/writer $(TARGET_DIR)/usr/bin/
 	$(INSTALL) -m 0755 $(@D)/finder-app/finder.sh $(TARGET_DIR)/usr/bin/
 	$(INSTALL) -m 0755 $(@D)/finder-app/finder-test.sh $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -m 0755 $(@D)/server/aesdsocket $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop $(TARGET_DIR)/etc/init.d/S99aesdsocket
 endef
 
 $(eval $(generic-package))
